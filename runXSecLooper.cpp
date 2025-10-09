@@ -17,7 +17,7 @@ public:
   {
   };
 
-bool isCCInclusiveSignal( ChainWrapper& chw, int entry )
+bool isCCInclusiveSignal( PlotUtils::ChainWrapper& chw, int entry )
 {
   double theta              = 0.;
   double true_muon_px   = (double)chw.GetValue("mc_primFSLepton",entry,0)/1000;
@@ -37,7 +37,7 @@ bool isCCInclusiveSignal( ChainWrapper& chw, int entry )
 }
   // Override this method from the base class to decide what events to
   // include in this selection
-  virtual bool passesCuts(ChainWrapper& chw, int entry)
+  virtual bool passesCuts(PlotUtils::ChainWrapper& chw, int entry)
   {
     if((int)chw.GetValue("mc_incoming", entry)!=14) return false;
     if((int)chw.GetValue("mc_current", entry)!=1) return false;
@@ -90,7 +90,7 @@ int main(const int argc, const char** argv)
   loop.runLoop();
 
   // Get the output histograms and save them to file
-  string geniefilename =  "GENIEXSECEXTRACT_" + playlistFile.substr(playlistFile.rfind("/")+1, playlistFile.find(".")) + ".root";
+  std::string geniefilename =  "GENIEXSECEXTRACT_" + playlistFile.substr(playlistFile.rfind("/")+1, playlistFile.find(".")) + ".root";
   TFile fout(geniefilename.c_str(), "RECREATE");
   for(uint i=0; i<loop.getXSecs().size(); ++i)
   {

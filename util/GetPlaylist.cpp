@@ -62,6 +62,12 @@ namespace
                                                      {126880, "minervame6F"}, //nuke
                                                      {123100, "minervame6G"}, //tracker
                                                      {127100, "minervame6G"}, //nuke
+                                                     {123250, "minervame6H"}, //tracker
+                                                     {126240, "minervame6H"}, //nuke
+                                                     {123425, "minervame6I"}, //tracker
+                                                     {127425, "minervame6I"}, //nuke
+                                                     {123565, "minervame6J"}, //tracker
+                                                     {127100, "minervame6J"}, //nuke
                                                      {131000, "minervame3A"}, //tracker
                                                      {135000, "minervame3A"}, //nuke
                                                      /*{113020, "minervame1Y"}, //tracker
