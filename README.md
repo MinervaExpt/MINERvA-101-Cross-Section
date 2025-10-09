@@ -1,6 +1,8 @@
 # CC Inclusive Cross Section Example for MINERvA 101 2021
 An example of a charged current (CC) inclusive cross section analysis using the MINERvA Analysis Toolkit (MAT).  Starts from the official MINERvA data preservation "anaTuple" .root files, produced by MasterAnaDev (MAD), and produces all histograms needed to extract a cross section.  The basic tutorial does not attempt to constrain backgrounds with sidebands.  Based on Ben Messerly's examples of using the MINERvA Analysis Toolkit and work by Mehreen Sultana on her thesis analysis.
 
+The instructions below are being updated to better serve use with MINERvA's Open Data Product (minerva.fnal.gov/opendata). Please rely on the wiki for documentation at this time.
+
 ## Installation Instructions
 **First** try [the wiki instructions](https://github.com/MinervaExpt/MINERvA-101-Cross-Section/wiki/Installation/#installing_the_whole_minerva_101_2021_tutorial) for a comprehensive guide to the dependencies as well as this package.  If that file no longer exists, you'll have to install the [dependencies](#Dependencies) yourself and follow the instrutions below.
 
