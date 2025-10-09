@@ -1,1 +1,1 @@
-install(FILES CCQENu_minervame1A_DATA_Inextinguishable_merged.txt CCQENu_minervame1A_MC_Inextinguishable_merged.txt MAD_minervame1A_MC_andrewsGPVM.txt MAD_minervame1A_DATA_andrewsGPVM.txt DESTINATION etc/playlists)
+install(FILES MAD_minervame1A_DATA_xrd.txt MAD_minervame1A_MC_xrd.txt DESTINATION etc/playlists)
