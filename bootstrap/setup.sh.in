@@ -5,7 +5,7 @@ OLD_LIBS=${LD_LIBRARY_PATH}
 source ${INSTALL_DIR}/bin/setup_MAT.sh
 source ${INSTALL_DIR}/bin/setup_MAT-MINERvA.sh
 source ${INSTALL_DIR}/bin/setup_UnfoldUtils.sh
-source ${INSTALL_DIR}/bin/setup_MAT_IncPions.sh
+source ${INSTALL_DIR}/bin/setup_MINERvA-101-Cross-Section.sh
 source ${INSTALL_DIR}/bin/setup_GENIEXSecExtract.sh
 
 #Don't repeat a lot of copies of INSTALL_DIR on PATH and LD_LIBRARY_PATH.
