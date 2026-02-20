@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.10 )
 
-project( MAT_IncPions )
+project( MINERvA-101-Cross-Section )
 
 #Add extra "modules" to CMake
 include(CTest)
