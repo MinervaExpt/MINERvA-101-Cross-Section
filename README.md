@@ -1,13 +1,15 @@
 # CC Inclusive Cross Section Example for MINERvA 101 2021
 An example of a charged current (CC) inclusive cross section analysis using the MINERvA Analysis Toolkit (MAT).  Starts from the official MINERvA data preservation "anaTuple" .root files, produced by MasterAnaDev (MAD), and produces all histograms needed to extract a cross section.  The basic tutorial does not attempt to constrain backgrounds with sidebands.  Based on Ben Messerly's examples of using the MINERvA Analysis Toolkit and work by Mehreen Sultana on her thesis analysis.
 
+The instructions below are being updated to better serve use with MINERvA's Open Data Product (minerva.fnal.gov/opendata). Please rely on the wiki for documentation at this time.
+
 ## Installation Instructions
 **First** try [the wiki instructions](https://github.com/MinervaExpt/MINERvA-101-Cross-Section/wiki/Installation/#installing_the_whole_minerva_101_2021_tutorial) for a comprehensive guide to the dependencies as well as this package.  If that file no longer exists, you'll have to install the [dependencies](#Dependencies) yourself and follow the instrutions below.
 
 **In case the wiki instructions aren't available:**
 1. Install [dependencies](#Dependencies)
 2. Make a working directory.  Mine is called `MINERvA101_2021/`
-3. Download the complete source from [MinervaExpt](https://github.com/MinervaExpt/MAT_IncPions): `git clone https://github.com/MinervaExpt/MAT_IncPions.git #Makes a src subdirectory for you`
+3. Download the complete source from [MinervaExpt](https://github.com/MinervaExpt/MAT_IncPions): `git clone https://github.com/MinervaExpt/MINERvA-101-Cross-Section.git #Makes a src subdirectory for you`
 4. Make a build directory: `mkdir opt && cd opt && mkdir build && cd build #opt for optimized build as opposed to debug build`
 5. Run cmake to generate a build system: ``cmake ../../src -DCMAKE_INSTALL_PREFIX=`pwd`/.. -DCMAKE_BUILD_TYPE=Release``
    If `cmake` fails talking about dependencies, you may have to manually point to them with command line arguments like `-DPlotUtils_DIR=/path/to/PlotUtilsInstallPrefix/lib`
@@ -43,7 +45,7 @@ terminal, but you can separate them from everything else with something like:
 
 ## Dependencies
 0. [git](https://git-scm.com/downloads): version control system.  **You probably already have this**
-1. [CMake 2.8](https://cmake.org/install/): build system generator for lots of operating systems.  **You probably already have this**
+1. [CMake 3.10](https://cmake.org/install/): build system generator for lots of operating systems.  **You probably already have this**
 2. [ROOT](https://root.cern/install/): object-oriented toolkit for high energy physics analysis.  Make sure to enable at least xrootd, kerberos, and Minuit for this tutorial.  **Already installed on MINERvA GPVMs**
 3. [CVS](https://www.gnu.org/software/trans-coord/manual/cvs/cvs.html): legacy version control system for MParamFiles.  Install it with your package manager.
 4. [MAT](https://github.com/MinervaExpt/MAT): the MINERvA Analysis Toolkit
