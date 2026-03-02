@@ -26,12 +26,21 @@ class Variable: public PlotUtils::VariableBase<CVUniverse>
     void InitializeMCHists(std::map<std::string, std::vector<CVUniverse*>>& mc_error_bands,
                            std::map<std::string, std::vector<CVUniverse*>>& truth_error_bands)
     {
-
+      
       std::map<int, std::string> BKGLabels = {{0, "NC"},
 					       {1, "Wrong_Sign"}};
       
       m_backgroundHists = new util::Categorized<Hist, int>((GetName() + "_background").c_str(),
 							   GetName().c_str(), BKGLabels,
+							   GetBinVec(), mc_error_bands);
+
+      std::map<int, std::string> SigIntTypes = {{1, "QE"},
+	                                        {2, "RES"},
+						{3, "DIS"},
+						{8, "2p2h"}};
+      
+      m_signalRecoHists = new util::Categorized<Hist, int>((GetName() + "_selected_sigReco_IntType").c_str(),
+							   GetName().c_str(), SigIntTypes,
 							   GetBinVec(), mc_error_bands);
 
       efficiencyNumerator = new Hist((GetName() + "_efficiency_numerator").c_str(), GetName().c_str(), GetBinVec(), mc_error_bands);
@@ -43,6 +52,7 @@ class Variable: public PlotUtils::VariableBase<CVUniverse>
 
     //Histograms to be filled
     util::Categorized<Hist, int>* m_backgroundHists;
+    util::Categorized<Hist, int>* m_signalRecoHists;
     Hist* dataHist;
     Hist* efficiencyNumerator;
     Hist* efficiencyDenominator;
@@ -74,6 +84,12 @@ class Variable: public PlotUtils::VariableBase<CVUniverse>
                                       categ.hist->SetDirectory(&file);
                                       categ.hist->Write(); //TODO: Or let the TFile destructor do this the "normal" way?                                                                                           
                                     });
+
+      m_signalRecoHists->visit([&file](Hist& categ)
+                                    {
+				      categ.hist->SetDirectory(&file);
+				      categ.hist->Write(); //TODO: Or let the TFile destructor do this the "normal" way?                                                                                           
+				    });
 
       if(efficiencyNumerator)
       {
@@ -113,6 +129,7 @@ class Variable: public PlotUtils::VariableBase<CVUniverse>
     void SyncCVHistos()
     {
       m_backgroundHists->visit([](Hist& categ) { categ.SyncCVHistos(); });
+      m_signalRecoHists->visit([](Hist& categ) { categ.SyncCVHistos(); });
       if(dataHist) dataHist->SyncCVHistos();
       if(efficiencyNumerator) efficiencyNumerator->SyncCVHistos();
       if(efficiencyDenominator) efficiencyDenominator->SyncCVHistos();

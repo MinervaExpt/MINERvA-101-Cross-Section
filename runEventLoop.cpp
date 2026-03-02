@@ -143,6 +143,7 @@ void LoopAndFillEventSelection(
             var->efficiencyNumerator->FillUniverse(universe, var->GetTrueValue(*universe), weight);
             var->migration->FillUniverse(universe, var->GetRecoValue(*universe), var->GetTrueValue(*universe), weight);
             var->selectedSignalReco->FillUniverse(universe, var->GetRecoValue(*universe), weight); //Efficiency numerator in reco variables.  Useful for warping studies.
+	    (*var->m_signalRecoHists)[universe->GetInteractionType()].FillUniverse(universe, var->GetRecoValue(*universe), weight);
           }
 
           for(auto& var: vars2D)
@@ -452,8 +453,9 @@ int main(const int argc, const char** argv)
   {
     CVUniverse::SetTruth(false);
     LoopAndFillEventSelection(options.m_mc, error_bands, vars, vars2D, studies, mycuts, model);
-    CVUniverse::SetTruth(true);
-    LoopAndFillEffDenom(options.m_truth, truth_bands, vars, vars2D, mycuts, model);
+    // Skipping the truth selection for reco-level comparisons
+    //CVUniverse::SetTruth(true);
+    //LoopAndFillEffDenom(options.m_truth, truth_bands, vars, vars2D, mycuts, model);
     options.PrintMacroConfiguration(argv[0]);
     std::cout << "MC cut summary:\n" << mycuts << "\n";
     mycuts.resetStats();
