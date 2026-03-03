@@ -1,7 +1,16 @@
 #!/usr/bin/python
 
-from ROOT import *
-from ROOT import PlotUtils
+import ROOT
+from ROOT import gROOT
+from ROOT import TH1
+from ROOT import TFile
+from ROOT import THStack
+from ROOT import TCanvas
+from ROOT import TPad
+from ROOT import TPaveText
+
+import PlotUtils
+from ROOT import MnvColors
 
 gROOT.SetBatch() #Don't render histograms to a window.  Also gets filled areas correct.
 
@@ -68,10 +77,10 @@ mcStack.SetMinimum(1)
 mcStack.SetMaximum(mcTotal.GetMaximum() * 10) #Make room for annotations above the plot
 mcStack.Draw("HIST")
 
-dataWithStatErrors.SetLineColor(kBlack)
+dataWithStatErrors.SetLineColor(ROOT.kBlack)
 dataWithStatErrors.SetLineWidth(lineSize)
 dataWithStatErrors.SetMarkerStyle(20) #Resizeable closed circle
-dataWithStatErrors.SetMarkerColor(kBlack)
+dataWithStatErrors.SetMarkerColor(ROOT.kBlack)
 dataWithStatErrors.SetMarkerSize(0.7)
 dataWithStatErrors.SetTitle("Data")
 dataWithStatErrors.Draw("SAME")
@@ -96,7 +105,7 @@ for whichBin in range(1, mcRatio.GetXaxis().GetNbins()+1):
   mcRatio.SetBinContent(whichBin, 1)
 
 ratio.SetTitle("")
-ratio.SetLineColor(kBlack)
+ratio.SetLineColor(ROOT.kBlack)
 ratio.SetLineWidth(lineSize)
 ratio.SetTitleSize(0)
 
@@ -115,9 +124,9 @@ ratio.SetMaximum(ratioMax)
 ratio.Draw()
 
 #Error envelope for the MC
-mcRatio.SetLineColor(kRed)
+mcRatio.SetLineColor(ROOT.kRed)
 mcRatio.SetLineWidth(lineSize)
-mcRatio.SetFillColorAlpha(kPink + 1, 0.4)
+mcRatio.SetFillColorAlpha(ROOT.kPink + 1, 0.4)
 mcRatio.Draw("E2 SAME")
 
 #Draw a flat line at 1 for ratio of MC to itself
@@ -129,7 +138,7 @@ straightLine.Draw("HIST SAME")
 top.cd()
 title = TPaveText(0.3, 0.91, 0.7, 1.0, "nbNDC") #no border and use Normalized Device Coordinates to place it
 title.SetFillStyle(0)
-title.SetLineColor(kWhite)
+title.SetLineColor(ROOT.kWhite)
 title.AddText("CC Inclusive Event Rate")
 title.Draw()
 
