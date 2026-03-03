@@ -105,7 +105,8 @@ class CVUniverse : public PlotUtils::MinervaUniverse {
   }
 
   virtual bool IsMinosMatchMuon() const {
-    return GetInt("has_interaction_vertex") == 1;
+    int matchMuon = GetIsMinosMatchTrack();
+    return (matchMuon == 1);
   }
   
   ROOT::Math::XYZTVector GetVertex() const
@@ -187,6 +188,8 @@ class CVUniverse : public PlotUtils::MinervaUniverse {
     return TMath::Sqrt(pow(nuclMass,2) + 2.0*(Enu-Emu)*nuclMass - Q2);
   }
 
+  virtual int GetIsMinosMatchTrack() const { return GetInt("isMinosMatchTrack"); }
+  
   //Still needed for some systematics to compile, but shouldn't be used for reweighting anymore.
   protected:
   #include "PlotUtils/WeightFunctions.h" // Get*Weight
