@@ -143,7 +143,6 @@ title.AddText("CC Inclusive Event Rate")
 title.Draw()
 
 plotter = PlotUtils.MnvPlotter()
-plotter.WritePreliminary(0.3, 0.82, 5e-2, True)
 
 #Make a PNG file of this canvas
 overall.Print(var + "DataMCRatio.png")
