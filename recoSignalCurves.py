@@ -34,9 +34,8 @@ mcFile = TFile.Open("runEventLoopMC.root")
 mcPOT = mcFile.Get("POTUsed").GetVal()
 dataPOT = dataFile.Get("POTUsed").GetVal()
 
-#Organize the MC backgrounds into a stacked histogram.
-#Also keep a sum of backgrounds that has full systematics
-#information.
+#Organize the signal components into a list of histograms.
+#Also keep a sum of backgrounds to plot with them
 sigList = [0, 1, 2, 3, 4]
 mcTot = mcFile.Get(dataName)
 mcTot.Scale(dataPOT/mcPOT)
@@ -47,7 +46,7 @@ for key in mcFile.GetListOfKeys():
     tagID = 0
     for tagName in tagList:
       if name.find(tagName) > -1:
-        print("Subtracting: ", sigName,  "_", tagList[tagID])
+        #print("Subtracting: ", sigName,  "_", tagList[tagID]) Diagnostic line 
         hist = key.ReadObj()
         hist.Scale(dataPOT/mcPOT)
         bkgSum.Add(hist, -1.0)
@@ -80,17 +79,23 @@ top.cd()
 mcTot.SetLineColor(ROOT.kRed)
 mcTot.SetLineWidth(lineSize)
 mcTot.SetMaximum(dataHist.GetMaximum()*1.15) # Draw with some room above
+mcTot.GetYaxis().SetTitle("Events")
+mcTot.GetYaxis().SetLabelSize(0.05)
+mcTot.GetYaxis().SetTitleSize(0.08)
+mcTot.GetYaxis().SetTitleOffset(0.45)
 mcTot.Draw("HIST")
-
-bkgSum.SetLineColor(ROOT.kGray+1)
-bkgSum.SetLineWidth(lineSize)
-bkgSum.SetLineStyle(8)
-bkgSum.Draw("HIST SAME")
+mcTot.SetTitle("MnvTune V1")
 
 for hist in sigList:
   hist.SetLineWidth(lineSize)
   hist.Draw("HIST SAME")
 
+bkgSum.SetLineColor(ROOT.kGray+1)
+bkgSum.SetLineWidth(lineSize)
+bkgSum.SetLineStyle(8)
+bkgSum.Draw("HIST SAME")
+bkgSum.SetTitle("Backgrounds")
+  
 dataWithStatErrors.SetLineColor(ROOT.kBlack)
 dataWithStatErrors.SetLineWidth(lineSize)
 dataWithStatErrors.SetMarkerStyle(20) #Resizeable closed circle
@@ -104,7 +109,7 @@ legend = top.BuildLegend(0.5, 0.4, 0.9, 0.9) #TODO: Explain legend position.  RO
 #Data/MC ratio panel
 bottom.cd()
 bottom.SetTopMargin(0)
-bottom.SetBottomMargin(0.3)
+bottom.SetBottomMargin(0.4)
 
 ratio = dataHist.Clone()
 mcTotalWithSys = mcTot
@@ -129,8 +134,9 @@ ratio.GetYaxis().SetTitleSize(0.16)
 ratio.GetYaxis().SetTitleOffset(0.2)
 ratio.GetYaxis().SetNdivisions(505) #5 minor divisions between 5 major divisions.  I'm trying to match a specific paper here.
 
-ratio.GetXaxis().SetTitleSize(0.16)
-ratio.GetXaxis().SetTitleOffset(0.9)
+ratio.GetXaxis().SetTitle("Reconstructed Muon Momentum [GeV/c]")
+ratio.GetXaxis().SetTitleSize(0.2)
+ratio.GetXaxis().SetTitleOffset(0.7)
 ratio.GetXaxis().SetLabelSize(labelSize)
 
 ratio.SetMinimum(ratioMin)
@@ -157,7 +163,6 @@ title.AddText("CC Inclusive Event Rate")
 title.Draw()
 
 plotter = PlotUtils.MnvPlotter()
-plotter.WritePreliminary(0.3, 0.82, 5e-2, True)
 
 #Make a PNG file of this canvas
-overall.Print(var + "Test.png")
+overall.Print(var + "RecoComparisonNotStacked.png")
