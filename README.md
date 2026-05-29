@@ -4,7 +4,7 @@ An example of a charged current (CC) inclusive cross section analysis using the 
 The instructions below are being updated to better serve use with MINERvA's Open Data Product (minerva.fnal.gov/opendata). Please rely on the wiki for documentation at this time.
 
 ## Installation Instructions
-**First** try [the wiki instructions](https://github.com/MinervaExpt/MINERvA-101-Cross-Section/wiki/Installation/#installing_the_whole_minerva_101_2021_tutorial) for a comprehensive guide to the dependencies as well as this package.  If that file no longer exists, you'll have to install the [dependencies](#Dependencies) yourself and follow the instrutions below.
+**First** try [the wiki instructions](https://github.com/MinervaExpt/MINERvA-101-Cross-Section/wiki/Prerequisites) for a comprehensive guide to the dependencies as well as this package.  If that file no longer exists, you'll have to install the [dependencies](#Dependencies) yourself and follow the instrutions below.
 
 **In case the wiki instructions aren't available:**
 1. Install [dependencies](#Dependencies)
